@@ -3,12 +3,14 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import AuthRoute from "./components/AuthRoute";
 import LoadingComponent from "./components/LoadingComponent";
+import logging from "./config/logging";
 import routes from "./config/routes";
 import {
   initialUserState,
   UserContextProvider,
   userReducer,
 } from "./contexts/user";
+import { Validate } from "./modules/auth";
 
 export interface IApplicationProps {}
 
@@ -28,12 +30,6 @@ const Application: React.FC<IApplicationProps> = (props) => {
     }, 1000);
   }, []);
 
-  /**
-   * Check localstorage for credentials
-   * if we do, verify it with the backend,
-   * if not, we are logged out initially
-   */
-
   const CheckLocalStorageForCredentials = () => {
     setAuthStage("Checking credentials");
     const fire_token = localStorage.getItem("fire_token");
@@ -44,11 +40,23 @@ const Application: React.FC<IApplicationProps> = (props) => {
         setIsLoading(false);
       }, 1000);
     } else {
-      /**validate with the backend*/
-      setAuthStage("Validating credentials");
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
+      return Validate(fire_token, (error, user) => {
+        if (error) {
+          logging.error(error);
+          setAuthStage(`User not found`);
+          userDispatch({ type: "logout", payload: initialUserState });
+          setTimeout(() => {
+            CheckLocalStorageForCredentials();
+          }, 1000);
+        } else if (user) {
+          setAuthStage(`User authenticated`);
+          userDispatch({ type: "login", payload: { user, fire_token } });
+          setIsLoading(false);
+          setTimeout(() => {
+            CheckLocalStorageForCredentials();
+          }, 1000);
+        }
+      });
     }
   };
 

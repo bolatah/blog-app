@@ -3,7 +3,10 @@ import { useNavigate } from "react-router";
 import UserContext from "../contexts/user";
 import IPageProps from "../interfaces/page";
 import firebase from "firebase";
-import { SignInWithSociaLMedia as SocialMediaPopup } from "../modules/auth";
+import {
+  Authenticate,
+  SignInWithSociaLMedia as SocialMediaPopup,
+} from "../modules/auth";
 import logging from "../config/logging";
 import CenterPiece from "../components/CenterPiece";
 import { Button, Card, CardBody, CardHeader } from "reactstrap";
@@ -37,6 +40,18 @@ const LoginPage: React.FC<IPageProps> = (props) => {
                 /**
                  * if we get a token, auth with the backend
                  */
+                Authenticate(uid, name, fire_token, (error, _user) => {
+                  if (error) {
+                    setError(error);
+                    setAuthenticating(false);
+                  } else if (_user) {
+                    userContext.userDispatch({
+                      type: "login",
+                      payload: { user: _user, fire_token },
+                    });
+                    navigate("/");
+                  }
+                });
               } catch (error) {
                 setError("invalid");
                 logging.error("error");
