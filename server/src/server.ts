@@ -5,6 +5,8 @@ import config from "./config/config";
 import mongoose from "mongoose";
 import firebaseAdmin from "firebase-admin";
 
+import userRoutes from "./routes/user";
+
 // const router = express.Router(); a slightly mini app is returned as the other mini apps can be exposed to different middlewares.
 
 const router = express(); // Create a new express application instance like the main app
@@ -61,6 +63,7 @@ router.use((req, res, next) => {
 });
 
 /** Routes */
+router.use("/users", userRoutes);
 
 /** Error Handling */
 router.use((req, res, next) => {
