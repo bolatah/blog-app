@@ -5,7 +5,7 @@ import axios from "axios";
 import config from "../config/config";
 import logging from "../config/logging";
 
-export const SignInWithSociaLMedia = (provider: firebase.auth.AuthProvider) =>
+export const SignInWithSocialMedia = (provider: firebase.auth.AuthProvider) =>
   new Promise<firebase.auth.UserCredential>((resolve, reject) => {
     auth
       .signInWithPopup(provider)

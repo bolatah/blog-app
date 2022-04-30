@@ -3,10 +3,7 @@ import { useNavigate } from "react-router";
 import UserContext from "../contexts/user";
 import IPageProps from "../interfaces/page";
 import firebase from "firebase";
-import {
-  Authenticate,
-  SignInWithSociaLMedia as SocialMediaPopup,
-} from "../modules/auth";
+import { Authenticate, SignInWithSocialMedia } from "../modules/auth";
 import logging from "../config/logging";
 import CenterPiece from "../components/CenterPiece";
 import { Button, Card, CardBody, CardHeader } from "reactstrap";
@@ -26,7 +23,7 @@ const LoginPage: React.FC<IPageProps> = (props) => {
     if (error !== "") setError("");
     setAuthenticating(true);
 
-    SocialMediaPopup(provider)
+    SignInWithSocialMedia(provider)
       .then(async (result) => {
         logging.info(result);
         let user = result.user;

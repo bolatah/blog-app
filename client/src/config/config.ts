@@ -8,7 +8,7 @@ const config = {
     appId: process.env.REACT_APP_FIREBASE_APPID,
   },
   server: {
-    url: process.env.SERVER_URL,
+    url: process.env.REACT_APP_SERVER_URL,
   },
 };
 

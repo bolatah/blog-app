@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
-import logging from "../../config/logging";
-import UserContext from "../../contexts/user";
+import logging from "../config/logging";
+import UserContext from "../contexts/user";
 
 export interface IAuthRouteProps {
   children: React.ReactNode;
@@ -12,7 +12,7 @@ const AuthRoute: React.FC<IAuthRouteProps> = (props) => {
 
   const { user } = useContext(UserContext).userState;
 
-  if (user._id) {
+  if (user._id === "") {
     logging.info("Unauthorized, redirecting ...");
     return <Navigate to="/login" />;
   } else {

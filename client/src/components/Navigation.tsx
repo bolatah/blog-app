@@ -8,7 +8,7 @@ import {
   NavbarBrand,
   NavbarText,
 } from "reactstrap";
-import UserContext, { initialUserState } from "../../contexts/user";
+import UserContext, { initialUserState } from "../contexts/user";
 
 export interface INavigationProps {}
 
@@ -24,7 +24,6 @@ const Navigation: React.FC<INavigationProps> = (props) => {
     <Navbar color="light" sticky="top" expand="md">
       <Container>
         <NavbarBrand tag={Link} to="/">
-          {" "}
           🗒️
         </NavbarBrand>
         <Nav className="mr-auto" navbar />
@@ -43,7 +42,6 @@ const Navigation: React.FC<INavigationProps> = (props) => {
         ) : (
           <div>
             <Button outline tag={Link} to="/edit">
-              {" "}
               Post a Blog{" "}
             </Button>
             <NavbarText className="mr-2 ml-2">|</NavbarText>

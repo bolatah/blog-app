@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardBody } from "reactstrap";
-import CenterPiece from "../CenterPiece";
+import CenterPiece from "./CenterPiece";
 
 export interface ILoadingProps {
   dotType?: string;
@@ -12,6 +12,7 @@ export const Loading: React.FC<ILoadingProps> = (props) => {
     <div className="text-center">
       <div className="stage">
         <div className={dotType} />
+        {children}
       </div>
     </div>
   );

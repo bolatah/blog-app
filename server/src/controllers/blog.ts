@@ -34,7 +34,8 @@ const create = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const read = (req: Request, res: Response, next: NextFunction) => {
-  const _id = req.params.id;
+  const _id = req.params.blogID;
+  console.log(req.params);
   logging.info(`Incoming read for ${_id}`);
   return Blog.findById(_id)
     .populate("author")
@@ -100,7 +101,7 @@ const query = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const update = (req: Request, res: Response, next: NextFunction) => {
-  const _id = req.params.id;
+  const _id = req.params.blogID;
 
   logging.info(`Incoming update for ${_id}`);
 
@@ -138,7 +139,7 @@ const update = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const deleteBlog = (req: Request, res: Response, next: NextFunction) => {
-  const _id = req.params.id;
+  const _id = req.params.blogID;
   logging.warn(`Incoming delete for ${_id}`);
   return Blog.findByIdAndDelete(_id)
     .then(() => {

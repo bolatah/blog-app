@@ -29,7 +29,8 @@ const HomePage: React.FC<IPageProps> = (props) => {
         method: "GET",
         url: `${config.server.url}/blogs`,
       });
-      if (response.status === 200 || response.status === 304) {
+
+      if (response.status === 200 || 304) {
         let blogs = response.data.blogs as IBlog[];
         blogs.sort((x, y) => y.updatedAt.localeCompare(x.updatedAt));
         setBlogs(blogs);
@@ -44,18 +45,18 @@ const HomePage: React.FC<IPageProps> = (props) => {
     }
   };
   if (loading) {
-    return <LoadingComponent>Loading blogs...</LoadingComponent>;
+    return <LoadingComponent> Loading blogs...</LoadingComponent>;
   }
 
   return (
     <Container>
       <Navigation />
-      <Header title="A blog of mine" headline="Let`s start to journey" />
+      <Header title="Open Blog" headline="Let`s start the journey" />
       <Container className="mt-5">
         {blogs.length === 0 && (
           <p>
             There are no blogs yet, you should <Link to="/edit"> post</Link>{" "}
-            one.{" "}
+            one.
           </p>
         )}
         {blogs.map((blog, index) => {
