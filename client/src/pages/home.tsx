@@ -44,12 +44,13 @@ const HomePage: React.FC<IPageProps> = (props) => {
       }, 1000);
     }
   };
+
   if (loading) {
     return <LoadingComponent> Loading blogs...</LoadingComponent>;
   }
 
   return (
-    <Container>
+    <>
       <Navigation />
       <Header title="Open Blog" headline="Let`s start the journey" />
       <Container className="mt-5">
@@ -76,7 +77,7 @@ const HomePage: React.FC<IPageProps> = (props) => {
         })}
         <ErrorText error={error} />
       </Container>
-    </Container>
+    </>
   );
 };
 

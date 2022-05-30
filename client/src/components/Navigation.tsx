@@ -1,15 +1,13 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import {
-  Button,
-  Container,
-  Nav,
-  Navbar,
-  NavbarBrand,
-  NavbarText,
-} from "reactstrap";
+import { Button, Nav, Navbar, NavbarBrand } from "reactstrap";
 import UserContext, { initialUserState } from "../contexts/user";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMagnifyingGlass,
+  faPenToSquare,
+} from "@fortawesome/free-solid-svg-icons";
+import SearchBar from "../pages/search";
 export interface INavigationProps {}
 
 const Navigation: React.FC<INavigationProps> = (props) => {
@@ -21,36 +19,62 @@ const Navigation: React.FC<INavigationProps> = (props) => {
   };
 
   return (
-    <Navbar color="light" sticky="top" expand="md">
-      <Container>
-        <NavbarBrand tag={Link} to="/">
-          🗒️
-        </NavbarBrand>
-        <Nav className="mr-auto" navbar />
-        {user._id === "" ? (
-          <div>
-            <NavbarText tag={Link} to="/login">
-              {" "}
-              Login
-            </NavbarText>
-            <NavbarText className="mr-2 ml-2">|</NavbarText>
-            <NavbarText tag={Link} to="/register">
-              {" "}
-              Sign Up{" "}
-            </NavbarText>
-          </div>
-        ) : (
-          <div>
-            <Button outline tag={Link} to="/edit">
-              Post a Blog{" "}
-            </Button>
-            <NavbarText className="mr-2 ml-2">|</NavbarText>
-            <Button outline size="sm" onClick={() => Logout()}>
-              Logout
-            </Button>
-          </div>
-        )}
-      </Container>
+    <Navbar sticky="top" expand="md">
+      <NavbarBrand tag={Link} to="/">
+        <FontAwesomeIcon
+          className="fa-lg fa-flip"
+          style={{ color: "#3a98db" }}
+          icon={faPenToSquare}
+        />
+      </NavbarBrand>
+      <Nav className="mr-auto" navbar />
+      <a href="/search" style={{ color: "#3a98db", marginRight: "0.5rem" }}>
+        <FontAwesomeIcon
+          className="fa-lg"
+          style={{ color: "#3a98db", marginRight: "0.5rem" }}
+          icon={faMagnifyingGlass}
+        />{" "}
+        Search
+      </a>
+
+      {user._id === "" ? (
+        <div>
+          <a href="/login" style={{ marginRight: "1rem", color: "black" }}>
+            {" "}
+            Login
+          </a>
+
+          <Button
+            tag={Link}
+            to="/register"
+            style={{ backgroundColor: "#3a98db" }}
+          >
+            {" "}
+            Sign Up{" "}
+          </Button>
+        </div>
+      ) : (
+        <div style={{ display: "flex" }}>
+          <Button
+            tag={Link}
+            to="/edit"
+            style={{
+              marginRight: "1rem",
+              color: "white",
+              backgroundColor: "#3a98db",
+            }}
+          >
+            Post a Blog{" "}
+          </Button>
+
+          <Button
+            onClick={() => Logout()}
+            style={{ backgroundColor: "#e84c3c" }}
+          >
+            Logout
+          </Button>
+        </div>
+      )}
     </Navbar>
   );
 };

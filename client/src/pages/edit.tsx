@@ -41,7 +41,6 @@ const EditPage: React.FunctionComponent = (props) => {
     } else {
       setLoading(false);
     }
-
     // eslint-disable-next-line
   }, []);
 
@@ -179,6 +178,7 @@ const EditPage: React.FunctionComponent = (props) => {
               onChange={(event) => {
                 setTitle(event.target.value);
               }}
+              style={{ backgroundColor: "#eee2dc" }}
             />
           </FormGroup>
           <FormGroup>
@@ -193,6 +193,7 @@ const EditPage: React.FunctionComponent = (props) => {
               onChange={(event) => {
                 setPicture(event.target.value);
               }}
+              style={{ backgroundColor: "#eee2dc" }}
             />
           </FormGroup>
           <FormGroup>
@@ -207,14 +208,18 @@ const EditPage: React.FunctionComponent = (props) => {
               onChange={(event) => {
                 setHeadline(event.target.value);
               }}
+              style={{ backgroundColor: "#eee2dc" }}
             />
           </FormGroup>
           <FormGroup>
             <Label>Content</Label>
             <Editor
+              editorStyle={{
+                backgroundColor: "#eee2dc",
+              }}
               editorState={editorState}
-              wrapperClassName="card"
-              editorClassName="card-body"
+              //wrapperClassName="card"
+              // editorClassName="card-body"
               onEditorStateChange={(newState) => {
                 setEditorState(newState);
                 setContent(

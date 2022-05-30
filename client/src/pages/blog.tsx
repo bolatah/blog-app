@@ -94,9 +94,11 @@ const BlogPage: React.FC<IPageProps> = (props) => {
       setDeleting(false);
     }
   };
+
   if (loading) {
     return <LoadingComponent>Loading Blog ...</LoadingComponent>;
   }
+
   if (blog) {
     console.log(user);
 

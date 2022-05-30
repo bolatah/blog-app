@@ -31,7 +31,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
       <Container>
         <Row className="align-items-center text-center">
           <Col>
-            <h1 className="display-4 text-white mt-5 mb-2">{title}</h1>
+            <h2 className="display-4 text-white mt-5 mb-2">{title}</h2>
             <h3 className="mb-5 text-white">{headline}</h3>
             {children}
           </Col>

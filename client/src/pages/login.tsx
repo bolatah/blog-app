@@ -9,7 +9,6 @@ import CenterPiece from "../components/CenterPiece";
 import { Button, Card, CardBody, CardHeader } from "reactstrap";
 import ErrorText from "../components/ErrorText";
 import { Providers } from "../config/firebase";
-import LoadingComponent from "../components/LoadingComponent";
 
 const LoginPage: React.FC<IPageProps> = (props) => {
   const [authenticating, setAuthenticating] = React.useState<boolean>(false);
@@ -56,11 +55,6 @@ const LoginPage: React.FC<IPageProps> = (props) => {
               }
             }
           } else {
-            /**
-             * if no name is returned, we could have a custom form
-             * here getting the name from the user , depending on the provider
-             * you are using . Google returns one, lets  just use that for now
-             */
             setError("the identity provider does not have a username");
             setAuthenticating(false);
           }
@@ -78,21 +72,22 @@ const LoginPage: React.FC<IPageProps> = (props) => {
   return (
     <CenterPiece>
       <Card>
-        <CardHeader>{isLogin ? "Login" : "Signup"}</CardHeader>
-        <CardBody>
+        <CardHeader style={{ backgroundColor: "#eee2dc" }}>
+          {isLogin ? "Login" : "Signup"}
+        </CardHeader>
+        <CardBody style={{ backgroundColor: "#eee2dc" }}>
           <ErrorText error={error} />
           <Button
-            block
             disabled={authenticating}
             onClick={() => SigninWithSocialMedia(Providers.google)}
-            style={{ backgroundColor: "#ea4335", borderColor: "#ea4335" }}
+            style={{
+              backgroundColor: "#3a98db",
+            }}
           >
-            <i className="fab fa-google">
-              {" "}
-              Sign {isLogin ? "in" : "up"} with Google{" "}
-            </i>
+            <i className="fab fa-google"></i> Sign {isLogin ? "in" : "up"} with
+            Google{" "}
           </Button>
-          {authenticating && <LoadingComponent card={false} />}
+          {authenticating}
         </CardBody>
       </Card>
     </CenterPiece>

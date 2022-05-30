@@ -15,7 +15,8 @@ export const initialUserState: IUserState = {
   user: DEFAULT_USER,
   fire_token: DEFAULT_FIRE_TOKEN,
 };
-
+// reducer function with the arguments of state and action
+// to be used later in useReducer hook
 export const userReducer = (state: IUserState, action: IUserActions) => {
   let user = action.payload.user;
   let fire_token = action.payload.fire_token;
@@ -39,7 +40,6 @@ export interface IUserContextProps {
 
 const UserContext = React.createContext<IUserContextProps>({
   userState: initialUserState,
-
   userDispatch: () => {},
 });
 

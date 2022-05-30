@@ -1,19 +1,30 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import { Card, CardBody } from "reactstrap";
 import CenterPiece from "./CenterPiece";
+
+const stageStyle: CSSProperties = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  position: "relative",
+  padding: "2rem ",
+  margin: "0 -5%",
+  overflow: "hidden",
+  backgroundColor: "#eee2dc",
+};
 
 export interface ILoadingProps {
   dotType?: string;
   children?: React.ReactNode;
+  stageStyle?: typeof stageStyle;
 }
+
 export const Loading: React.FC<ILoadingProps> = (props) => {
-  const { children, dotType } = props;
+  const { children, dotType, stageStyle } = props;
   return (
-    <div className="text-center">
-      <div className="stage">
-        <div className={dotType} />
-        {children}
-      </div>
+    <div style={stageStyle}>
+      <div className={dotType} />
+      {children}
     </div>
   );
 };
@@ -26,15 +37,16 @@ export interface ILoadingComponentProps {
   card?: boolean;
   dotType?: string;
   children?: React.ReactNode;
+  stageStyle?: object;
 }
 
 const LoadingComponent: React.FC<ILoadingComponentProps> = (props) => {
-  const { card, children, dotType } = props;
+  const { card, children, dotType, stageStyle } = props;
   if (card) {
     return (
       <CenterPiece>
         <Card>
-          <CardBody>
+          <CardBody style={{ backgroundColor: "#eee2dc" }}>
             <Loading dotType={dotType}>{children}</Loading>
           </CardBody>
         </Card>
@@ -42,8 +54,8 @@ const LoadingComponent: React.FC<ILoadingComponentProps> = (props) => {
     );
   }
   return (
-    <div className="text-center">
-      <div className="stage">
+    <div>
+      <div style={stageStyle}>
         <div className={dotType} />
       </div>
       {children}
@@ -55,4 +67,5 @@ LoadingComponent.defaultProps = {
   card: true,
   dotType: "dot-bricks",
 };
+
 export default LoadingComponent;

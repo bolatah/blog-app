@@ -16,17 +16,17 @@ const BlogPreview: React.FC<IBlogPreviewProps> = (props) => {
   const { _id, title, headline, children, author, createdAt, updatedAt } =
     props;
   return (
-    <Card className="border-0">
-      <CardBody className="p-0">
+    <Card className="border-0" style={{ backgroundColor: "#eee2dc" }}>
+      <CardBody className="p-3">
         <Link
           to={`/blogs/${_id}`}
           style={{ textDecoration: "none" }}
           className="text-primary"
         >
-          <h1>
+          <h2>
             <strong>{title}</strong>
-          </h1>
-          <h3>{headline}</h3> <br />
+          </h2>
+          <h4>{headline}</h4> <br />
         </Link>
         {createdAt !== updatedAt ? (
           <p>

@@ -3,7 +3,6 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import AuthRoute from "./components/AuthRoute";
 import LoadingComponent from "./components/LoadingComponent";
-import Test from "./components/Test";
 import logging from "./config/logging";
 import routes from "./config/routes";
 import {
@@ -72,16 +71,6 @@ const Application: React.FC<IApplicationProps> = (props) => {
   return (
     <UserContextProvider value={userContextValues}>
       <Routes>
-        <Route
-          path="/test"
-          element={
-            <AuthRoute>
-              {" "}
-              <Test />{" "}
-            </AuthRoute>
-          }
-        />
-
         {routes.map((route, index) => {
           if (route.auth) {
             return (
