@@ -7,7 +7,7 @@ import {
   faMagnifyingGlass,
   faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
-import SearchBar from "../pages/search";
+// import SearchBar from "./Search";
 export interface INavigationProps {}
 
 const Navigation: React.FC<INavigationProps> = (props) => {
@@ -28,49 +28,25 @@ const Navigation: React.FC<INavigationProps> = (props) => {
         />
       </NavbarBrand>
       <Nav className="mr-auto" navbar />
-      <a href="/search" style={{ color: "#3a98db", marginRight: "0.5rem" }}>
-        <FontAwesomeIcon
-          className="fa-lg"
-          style={{ color: "#3a98db", marginRight: "0.5rem" }}
-          icon={faMagnifyingGlass}
-        />{" "}
-        Search
-      </a>
 
       {user._id === "" ? (
         <div>
-          <a href="/login" style={{ marginRight: "1rem", color: "black" }}>
+          <a href="/login" className="login">
             {" "}
             Login
           </a>
 
-          <Button
-            tag={Link}
-            to="/register"
-            style={{ backgroundColor: "#3a98db" }}
-          >
-            {" "}
+          <Button className="button-register" tag={Link} to="/register">
             Sign Up{" "}
           </Button>
         </div>
       ) : (
         <div style={{ display: "flex" }}>
-          <Button
-            tag={Link}
-            to="/edit"
-            style={{
-              marginRight: "1rem",
-              color: "white",
-              backgroundColor: "#3a98db",
-            }}
-          >
+          <Button className="button-post-a-blog" tag={Link} to="/edit">
             Post a Blog{" "}
           </Button>
 
-          <Button
-            onClick={() => Logout()}
-            style={{ backgroundColor: "#e84c3c" }}
-          >
+          <Button className="button-logout" onClick={() => Logout()}>
             Logout
           </Button>
         </div>

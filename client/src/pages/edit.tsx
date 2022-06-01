@@ -34,6 +34,7 @@ const EditPage: React.FunctionComponent = (props) => {
 
   const { user } = useContext(UserContext).userState;
   let { blogID } = useParams();
+
   useEffect(() => {
     if (blogID) {
       setId(blogID);

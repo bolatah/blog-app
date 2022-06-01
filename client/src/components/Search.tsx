@@ -1,16 +1,18 @@
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
-import { CardGroup, Container, Form, Input } from "reactstrap";
+import { Container, Input } from "reactstrap";
 import IBlog from "../interfaces/blog";
 import config from "../config/config";
 import logging from "../config/logging";
-import BlogPreview from "../components/BlogPreview";
+import BlogPreview from "./BlogPreview";
 import IUser from "../interfaces/user";
-import Navigation from "../components/Navigation";
-import Header from "../components/Header";
-import ErrorText from "../components/ErrorText";
+import Navigation from "./Navigation";
+import Header from "./Header";
+import ErrorText from "./ErrorText";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-const SearchPage = () => {
+const Search = () => {
   const [blogs, setBlogs] = useState<IBlog[]>([]);
   const [filteredResults, setFilteredResults] = useState<IBlog[]>([]);
   const [searchInput, setSearchInput] = useState<string>("");
@@ -50,10 +52,10 @@ const SearchPage = () => {
             .includes(enteredName.toLowerCase());
         });
         setFilteredResults(filteredData);
-        console.log(enteredName, filteredData);
+        // console.log(enteredName, filteredData);
       } else {
         setFilteredResults(blogs);
-        console.log(blogs);
+        // console.log(blogs);
       }
     },
     [blogs]
@@ -61,22 +63,26 @@ const SearchPage = () => {
 
   return (
     <Container fluid className="p-0">
-      <Navigation />
-      <Header
-        image="https://startbootstrap.github.io/startbootstrap-clean-blog/img/home-bg.jpg"
-        headline=""
-        title=""
-      />
       <Container className="mt-5 mb-5">
-        <Input
-          value={searchInput}
-          className="search-bar"
-          id="search"
-          name="search"
-          placeholder="Search in the blogs"
-          type="search"
-          onChange={searchBlogs}
-        />
+        <div className="search-bar">
+          <div>
+            <FontAwesomeIcon
+              className="fa-lg"
+              style={{ color: "#3a98db", marginRight: "1rem" }}
+              icon={faMagnifyingGlass}
+            />{" "}
+          </div>
+          <Input
+            value={searchInput}
+            className="search-bar"
+            id="search"
+            name="search"
+            placeholder="Search in the blogs"
+            type="search"
+            onChange={searchBlogs}
+          />
+        </div>
+
         {searchInput.length > 0
           ? filteredResults.map((blog, index: number) => {
               return (
@@ -108,11 +114,10 @@ const SearchPage = () => {
                 </div>
               );
             })}
-
         <ErrorText error={error} />
       </Container>
     </Container>
   );
 };
 
-export default SearchPage;
+export default Search;

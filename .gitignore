@@ -26,6 +26,7 @@ client/.env
 client/build
 client/public
 client/node_modules
+client/src/pages/test.tsx
 
 server/.env
 server/node_modules

@@ -11,7 +11,7 @@ import config from "../config/config";
 import logging from "../config/logging";
 import IBlog from "../interfaces/blog";
 import IPageProps from "../interfaces/page";
-import IUser from "../interfaces/user";
+import Search from "../components/Search";
 
 const HomePage: React.FC<IPageProps> = (props) => {
   const [blogs, setBlogs] = useState<IBlog[]>([]);
@@ -60,21 +60,7 @@ const HomePage: React.FC<IPageProps> = (props) => {
             one.
           </p>
         )}
-        {blogs.map((blog, index) => {
-          return (
-            <div key={index}>
-              <BlogPreview
-                _id={blog._id}
-                title={blog.title}
-                headline={blog.headline}
-                author={(blog.author as IUser).name}
-                createdAt={blog.createdAt}
-                updatedAt={blog.updatedAt}
-              />
-              <hr />
-            </div>
-          );
-        })}
+        <Search />
         <ErrorText error={error} />
       </Container>
     </>
