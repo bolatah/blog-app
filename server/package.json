@@ -24,6 +24,6 @@
     "@types/mongoose": "^5.11.97"
   },
   "engines": {
-    "node": "16.x"
+    "node": "16.15.0"
   }
 }

@@ -1,5 +1,6 @@
 import http from "http";
 import express from "express";
+import path from "path";
 import logging from "./config/logging";
 import config from "./config/config";
 import mongoose from "mongoose";
@@ -8,12 +9,12 @@ import firebaseAdmin from "firebase-admin";
 import userRoutes from "./routes/user";
 import blogRoutes from "./routes/blog";
 
-// const router = express.Router(); a slightly mini app is returned as the other mini apps can be exposed to different middlewares.
+// const app = express.Router(); a slightly mini app is returned as the other mini apps can be exposed to different middlewares.
 
-const router = express(); // Create a new express application instance like the main app
+const app = express(); // Create a new express application instance like the main app
 
 /** Server Handling */
-const httpServer = http.createServer(router);
+const httpServer = http.createServer(app);
 
 /** Firebase Admin SDK is a set of server libraries that lets you interact with Firebase*/
 let serviceAccountKey = require("./config/serviceAccountKey.json");
@@ -33,7 +34,7 @@ mongoose
   });
 
 /** Logging Express Middlewares */
-router.use((req, res, next) => {
+app.use((req, res, next) => {
   logging.info(
     `METHOD: '${req.method}' - URL : '${req.url}' -IP: '${req.socket.remoteAddress}'`
   );
@@ -46,11 +47,11 @@ router.use((req, res, next) => {
 });
 
 /** Parsing the body */
-router.use(express.urlencoded({ extended: true }));
-router.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 /** API Access Policies */
-router.use((req, res, next) => {
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
@@ -63,12 +64,14 @@ router.use((req, res, next) => {
   next();
 });
 
+app.use(express.static("public"));
+
 /** Routes */
-router.use("/users", userRoutes);
-router.use("/blogs", blogRoutes);
+app.use("/users", userRoutes);
+app.use("/blogs", blogRoutes);
 
 /** Error Handling */
-router.use((req, res, next) => {
+app.use((req, res, next) => {
   const error = new Error("Not Found");
   return res.status(404).json({
     message: error.message,
