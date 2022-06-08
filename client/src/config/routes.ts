@@ -4,6 +4,7 @@ import EditPage from "../pages/edit";
 import HomePage from "../pages/home";
 import LoginPage from "../pages/login";
 import Test from "../pages/test";
+
 const authRoutes: IRoute[] = [
   { name: "Login", path: "/login", auth: false, component: LoginPage },
   { name: "Register", path: "/register", auth: false, component: LoginPage },

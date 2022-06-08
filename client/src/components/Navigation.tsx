@@ -3,10 +3,7 @@ import { Link } from "react-router-dom";
 import { Button, Nav, Navbar, NavbarBrand } from "reactstrap";
 import UserContext, { initialUserState } from "../contexts/user";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faMagnifyingGlass,
-  faPenToSquare,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 // import SearchBar from "./Search";
 export interface INavigationProps {}
 
@@ -31,10 +28,10 @@ const Navigation: React.FC<INavigationProps> = (props) => {
 
       {user._id === "" ? (
         <div>
-          <a href="/login" className="login">
+          <Link to="/login" className="login">
             {" "}
             Login
-          </a>
+          </Link>
 
           <Button className="button-register" tag={Link} to="/register">
             Sign Up{" "}

@@ -1,6 +1,6 @@
 import React from "react";
 // importing always from react-router-dom intead of react-router
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import AuthRoute from "./components/AuthRoute";
 import LoadingComponent from "./components/LoadingComponent";
 import logging from "./config/logging";
@@ -93,6 +93,7 @@ const Application: React.FC<IApplicationProps> = (props) => {
             />
           );
         })}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </UserContextProvider>
   );

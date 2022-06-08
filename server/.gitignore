@@ -22,18 +22,11 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-client/.env
-client/build
-client/public
-client/node_modules
-client/src/pages/test.tsx
-client/src/appTest.tsx
 
-server/.env
-server/node_modules
-server/public
+.env
+node_modules
 
 
-server/src/blog-app-typescript/server/blog-d5f84-firebase-adminsdk-ngqzp-356f4719aa.json
+/src/blog-app-typescript/server/blog-d5f84-firebase-adminsdk-ngqzp-356f4719aa.json
 
-server/src/config/serviceAccountKey.json
+/src/config/serviceAccountKey.json

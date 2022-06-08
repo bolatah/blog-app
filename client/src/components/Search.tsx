@@ -6,8 +6,6 @@ import config from "../config/config";
 import logging from "../config/logging";
 import BlogPreview from "./BlogPreview";
 import IUser from "../interfaces/user";
-import Navigation from "./Navigation";
-import Header from "./Header";
 import ErrorText from "./ErrorText";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";

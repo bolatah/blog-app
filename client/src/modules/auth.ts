@@ -2,7 +2,7 @@ import firebase from "firebase";
 import { auth } from "../config/firebase";
 import IUser from "../interfaces/user";
 import axios from "axios";
-import config from "../config/config";
+//import config from "../config/config";
 import logging from "../config/logging";
 
 export const SignInWithSocialMedia = (provider: firebase.auth.AuthProvider) =>
@@ -22,7 +22,7 @@ export const Authenticate = async (
   try {
     const response = await axios({
       method: "POST",
-      url: `${config.server.url}/users/login`,
+      url: `${process.env.REACT_APP_SERVER_URL}/users/login`,
       data: {
         uid,
         name,
@@ -53,7 +53,7 @@ export const Validate = async (
   try {
     const response = await axios({
       method: "GET",
-      url: `${config.server.url}/users/validate`,
+      url: `${process.env.REACT_APP_SERVER_URL}/users/validate`,
       headers: { Authorization: `Bearer ${fire_token}` },
     });
     if (response.status === 200 || response.status === 304) {

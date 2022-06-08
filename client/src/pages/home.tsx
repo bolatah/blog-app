@@ -29,7 +29,6 @@ const HomePage: React.FC<IPageProps> = (props) => {
         method: "GET",
         url: `${config.server.url}/blogs`,
       });
-
       if (response.status === 200 || 304) {
         let blogs = response.data.blogs as IBlog[];
         blogs.sort((x, y) => y.updatedAt.localeCompare(x.updatedAt));
