@@ -108,7 +108,7 @@ const EditPage: React.FunctionComponent = (props) => {
 
       if (response.status === 201) {
         setId(response.data.blog._id);
-        setSuccess("Blog posted.  You can continue to edit on this page.");
+        setSuccess("Blog posted. You can continue to edit on this page.");
       } else {
         setError(`Unable to save blog.`);
       }

@@ -7,7 +7,7 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 // import SearchBar from "./Search";
 export interface INavigationProps {}
 
-const Navigation: React.FC<INavigationProps> = (props) => {
+const Navigation: React.FC<INavigationProps> = (_props) => {
   const userContext = useContext(UserContext);
   const { user } = userContext.userState;
 

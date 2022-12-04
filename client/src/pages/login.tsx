@@ -10,7 +10,7 @@ import { Button, Card, CardBody, CardHeader } from "reactstrap";
 import ErrorText from "../components/ErrorText";
 import { Providers } from "../config/firebase";
 
-const LoginPage: React.FC<IPageProps> = (props) => {
+const LoginPage: React.FC<IPageProps> = (_props) => {
   const [authenticating, setAuthenticating] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string>("");
 

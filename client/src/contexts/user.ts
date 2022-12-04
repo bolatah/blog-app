@@ -7,7 +7,7 @@ export interface IUserState {
 }
 
 export interface IUserActions {
-  type: "login" | "logout" | "authenticate";
+  type: "login" | "logout" | "user-bolatah";
   payload: { user: IUser; fire_token: string };
 }
 
@@ -15,8 +15,7 @@ export const initialUserState: IUserState = {
   user: DEFAULT_USER,
   fire_token: DEFAULT_FIRE_TOKEN,
 };
-// reducer function with the arguments of state and action
-// to be used later in useReducer hook
+
 export const userReducer = (state: IUserState, action: IUserActions) => {
   let user = action.payload.user;
   let fire_token = action.payload.fire_token;
@@ -28,6 +27,7 @@ export const userReducer = (state: IUserState, action: IUserActions) => {
     case "logout":
       localStorage.removeItem("fire_token");
       return initialUserState;
+
     default:
       return state;
   }

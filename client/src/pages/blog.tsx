@@ -20,7 +20,7 @@ import ErrorText from "../components/ErrorText";
 import Header from "../components/Header";
 import IUser from "../interfaces/user";
 
-const BlogPage: React.FC<IPageProps> = (props) => {
+const BlogPage: React.FC<IPageProps> = (_props) => {
   const [_id, setId] = useState<string>("");
   const [blog, setBlog] = useState<IBlog | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -39,8 +39,6 @@ const BlogPage: React.FC<IPageProps> = (props) => {
     } else {
       navigate("/");
     }
-
-    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -48,7 +46,6 @@ const BlogPage: React.FC<IPageProps> = (props) => {
       getBlog();
     } else {
     }
-    // eslint-disable-next-line
   }, [_id]);
 
   const getBlog = async () => {

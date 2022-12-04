@@ -9,8 +9,6 @@ import userRoutes from "./routes/user";
 import blogRoutes from "./routes/blog";
 import logging from "./config/logging";
 import config from "./config/config";
-import path from "path";
-//import * as serviceAccountKey from "./config/serviceAccountKey.json";
 
 dotenv.config();
 
@@ -82,14 +80,6 @@ app.use(express.static("public"));
 /** Routes */
 app.use("/users", userRoutes);
 app.use("/blogs", blogRoutes);
-
-// /** Error Handling */
-// app.use((req, res, next) => {
-//   const error = new Error("Not Found");
-//   return res.status(404).json({
-//     message: error.message,
-//   });
-// });
 
 // Redirecting to root
 app.use((req, res, next) => {

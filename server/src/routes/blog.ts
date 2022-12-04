@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.get("/", controller.readAll);
 router.get("/read/:blogID", controller.read);
+router.get("/readBolatah", controller.readBolatahBlogs);
 router.post("/create", controller.create);
 router.post("/query", controller.query);
 router.patch("/update/:blogID", controller.update);

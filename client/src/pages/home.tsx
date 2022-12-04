@@ -1,7 +1,7 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Container } from "reactstrap";
+import { Container, Input } from "reactstrap";
 import BlogPreview from "../components/BlogPreview";
 import ErrorText from "../components/ErrorText";
 import Header from "../components/Header";
@@ -11,10 +11,16 @@ import config from "../config/config";
 import logging from "../config/logging";
 import IBlog from "../interfaces/blog";
 import IPageProps from "../interfaces/page";
-import Search from "../components/Search";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import IUser from "../interfaces/user";
+
+//import Search from "../components/Search";
 
 const HomePage: React.FC<IPageProps> = (props) => {
   const [blogs, setBlogs] = useState<IBlog[]>([]);
+  const [filteredResults, setFilteredResults] = useState<IBlog[]>([]);
+  const [searchInput, setSearchInput] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
   // GetAllBlogs is going to be async because it is calling the api
@@ -44,6 +50,25 @@ const HomePage: React.FC<IPageProps> = (props) => {
     }
   };
 
+  const searchBlogs = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const enteredName = e.target.value;
+      setSearchInput(enteredName);
+      if (enteredName.length > 0) {
+        const filteredData = blogs.filter((blog) => {
+          return Object.values(blog.title || blog.headline)
+            .join("")
+            .toLowerCase()
+            .includes(enteredName.toLowerCase());
+        });
+        setFilteredResults(filteredData);
+      } else {
+        setFilteredResults(blogs);
+      }
+    },
+    [blogs]
+  );
+
   if (loading) {
     return <LoadingComponent> Loading blogs...</LoadingComponent>;
   }
@@ -59,7 +84,57 @@ const HomePage: React.FC<IPageProps> = (props) => {
             one.
           </p>
         )}
-        <Search />
+        {/*     <Search /> */}
+        <div className="search-bar">
+          <div>
+            <FontAwesomeIcon
+              className="fa-lg"
+              style={{ color: "#3a98db", marginRight: "1rem" }}
+              icon={faMagnifyingGlass}
+            />{" "}
+          </div>
+          <Input
+            value={searchInput}
+            className="search-bar"
+            id="search"
+            name="search"
+            placeholder="Search in the blogs"
+            type="search"
+            onChange={searchBlogs}
+          />
+        </div>
+
+        {searchInput.length > 0
+          ? filteredResults.map((blog, index: number) => {
+              return (
+                <div key={index}>
+                  <BlogPreview
+                    _id={blog._id}
+                    title={blog.title}
+                    headline={blog.headline}
+                    author={(blog.author as IUser).name}
+                    createdAt={blog.createdAt}
+                    updatedAt={blog.updatedAt}
+                  />
+                  <hr />
+                </div>
+              );
+            })
+          : blogs.map((blog, index) => {
+              return (
+                <div key={index}>
+                  <BlogPreview
+                    _id={blog._id}
+                    title={blog.title}
+                    headline={blog.headline}
+                    author={(blog.author as IUser).name}
+                    createdAt={blog.createdAt}
+                    updatedAt={blog.updatedAt}
+                  />
+                  <hr />
+                </div>
+              );
+            })}
         <ErrorText error={error} />
       </Container>
     </>
