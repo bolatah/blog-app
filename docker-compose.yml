@@ -1,0 +1,27 @@
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.reactUI
+    env_file: ./client/.env
+    ports:
+      - "3000:3000"    
+    depends_on:
+      - db
+  server: 
+    build:
+      context: ./server
+      dockerfile: Dockerfile.node
+    env_file: ./server/.env
+    ports: 
+      - "8000:8000"    #external:internal 
+    depends_on: # letting you create the backend service before the frontend service
+      - db
+  db:
+    volumes:
+      - contact_manager_db:/data/db # ensures the Mongo data is persisted across container restarts
+    image: mongo:latest
+    ports:
+      - "27017:27017"  
+volumes:
+   contact_manager_db:

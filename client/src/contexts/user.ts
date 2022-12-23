@@ -7,7 +7,7 @@ export interface IUserState {
 }
 
 export interface IUserActions {
-  type: "login" | "logout" | "user-bolatah";
+  type: "login" | "logout";
   payload: { user: IUser; fire_token: string };
 }
 
