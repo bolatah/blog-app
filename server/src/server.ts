@@ -16,9 +16,6 @@ dotenv.config();
 
 const app = express(); // Create a new express application instance like the main app
 
-/** Server Handling */
-const httpServer = http.createServer(app);
-
 /** Firebase Admin SDK is a set of server libraries that lets you interact with Firebase*/
 
 //let serviceAccountKey = require("./config/serviceAccountKey.json");
@@ -89,6 +86,6 @@ app.use((req, res, next) => {
 /** Listen for requests */
 const port = process.env.PORT || 8000;
 
-httpServer.listen(port, () => {
+app.listen(port, () => {
   logging.info(`Server is running on ${config.server.hostname}:${port}`);
 });

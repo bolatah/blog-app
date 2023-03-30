@@ -1,11 +1,11 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
   "main": "src/server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf build && tsc",
+    "start-test": "node build/server.js --trace-warnings", 
     "start:dev": "nodemon src/server.ts",
     "start": "node --loader ts-node/esm --trace-warnings --experimental-specifier-resolution=node src/server.ts"
   },
