@@ -8,32 +8,29 @@
 # testing
 /coverage
 
+# next.js
+/.next/
+/out/
+
 # production
 /build
 
 # misc
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+*.pem
 
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
-client/.env
-client/build
-client/public
-client/node_modules
-client/src/pages/test.tsx
-client/src/appTest.tsx
+# local env files
+.env*.local
 
-server/.env
-server/node_modules
-server/public
+# vercel
+.vercel
 
-
-server/src/blog-app-typescript/server/blog-d5f84-firebase-adminsdk-ngqzp-356f4719aa.json
-
-server/src/config/serviceAccountKey.json
+# typescript
+*.tsbuildinfo
+next-env.d.ts
