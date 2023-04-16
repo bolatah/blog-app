@@ -5,21 +5,14 @@ import ErrorText from "../../components/ErrorText";
 import Header from "../../components/Header";
 import Navigation from "../../components/Navigation";
 import config from "../../config/config";
-import logging from "../../config/logging";
 import UserContext from "../../contexts/user";
-import { EditorState, ContentState, convertToRaw } from "draft-js";
-//import { Editor } from "react-draft-wysiwyg";
+import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
-//import htmlToDraft from "html-to-draftjs";
 import SuccessText from "../../components/Success";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { NextRouter, useRouter } from "next/router";
 import Link from "next/link";
 import AuthRoute from "../../components/AuthRoute";
 import dynamic from "next/dynamic";
-import { IBlogClient } from "@/interfaces/blog";
-import { type } from "os";
-import { json } from "stream/consumers";
 
 const Editor = dynamic(
   () => import("react-draft-wysiwyg").then((module) => module.Editor),
@@ -53,8 +46,6 @@ const CreatePage: FC = () => {
   const [error, setError] = useState<string>("");
 
   const { user } = useContext(UserContext).userState;
-  //const router: NextRouter = useRouter();
-  //let { id } = router.query;
 
   const createBlog = async () => {
     if (title === "" || headline === "" || content === "") {

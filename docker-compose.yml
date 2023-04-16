@@ -1,0 +1,15 @@
+version: '3'
+services:
+  blog-app-with-nextjs:
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/blog-app-with-nextjs
+      - ./.env.local:/blog-app-with-nextjs/.env.local # Mount .env.local file as a volume
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./.env.local # Load environment variables from .env.local file
+    build:
+      context: .
+    command: yarn start # Start the application using 'yarn start' command

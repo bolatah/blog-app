@@ -1,4 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest } from "next";
+import cors from "cors";
 import { User } from "../../../models/models";
 import mongoConnect from "@/config/mongo";
 import nextConnect from "next-connect";
@@ -7,7 +8,7 @@ import register from "./register";
 import IResponse from "@/interfaces/response";
 
 const handler = nextConnect();
-
+handler.use(cors());
 handler.use(firebaseMiddleware);
 
 handler.post(async (req: NextApiRequest, res: IResponse) => {

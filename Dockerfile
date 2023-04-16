@@ -6,6 +6,8 @@ COPY package*.json yarn.lock ./
 
 COPY .babelrc next.config.js ./
 
+COPY .env.local .env.local
+
 RUN yarn install --frozen-lockfile
 
 COPY . .

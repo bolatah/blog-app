@@ -8,9 +8,7 @@ import config from "../../../config/config";
 import logging from "../../../config/logging";
 import UserContext from "../../../contexts/user";
 import { EditorState, ContentState, convertToRaw } from "draft-js";
-//import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
-//import htmlToDraft from "html-to-draftjs";
 import SuccessText from "../../../components/Success";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { NextRouter, useRouter } from "next/router";
@@ -73,7 +71,7 @@ const EditPage: FC = () => {
     try {
       const response = await axios({
         method: "GET",
-        url: `${config.server.url}/blogs/${idParam}`,
+        url: `${process.env.NEXT_PUBLIC_SERVER_URL}/blogs/${idParam}`,
       });
 
       if (response.status === (200 || 304)) {

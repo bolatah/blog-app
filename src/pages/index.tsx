@@ -18,7 +18,9 @@ type Props = {
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
   try {
-    const response = await axios.get("http://localhost:3000/api/blogs/readAll");
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/blogs/readAll`
+    );
 
     if (response.status === 200 || 304) {
       let blogs = response.data as IBlogClient[];
